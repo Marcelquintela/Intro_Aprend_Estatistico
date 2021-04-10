@@ -1,0 +1,34 @@
+LOGNORMAL
+Ela é muito interessante para modelar variáveis de interesse assimétricas à direita.
+Essa distribuição de aplica a variáveis aleatórias cujo logaritmo é normalmente
+distribuído.
+
+
+O que é a distribuição lognormal?
+A distribuição lognormal representa um dos modelos teóricos de maior importância no estudo de depósitos minerais, pois ela explica a ocorrência de metais raros (Cu, W, Sn, Au, Ag etc.), diamante e urânio.
+
+Na natureza, alguns fenômenos são tipicamente lognormais, como, por exemplo, a distribuição de terremotos em zonas tectonicamente ativas, onde há um grande número de terremotos de pequena magnitude, mas alguns altamente destrutivos.
+
+Por definição, a distribuição lognormal é caracterizada pela propriedade que os logaritmos dos valores seguem uma distribuição normal (Koch e Link, 1970, p. 213).
+
+Esta distribuição de frequências se caracteriza pela forte assimetria positiva, dada pela ocorrência de uma grande quantidade de valores baixos e uma pequena quantidade de valores altos a muito altos.
+
+Em depósitos minerais, muitas vezes os valores altos ou muito altos não são completamente amostrados na pesquisa mineral e passam a ser conhecidos na fase da mineração.
+
+Muitas vezes, esses valores altos são interpretados como valores anômalos e excluídos do conjunto de dados. Esse procedimento deve ser evitado na avaliação de recursos minerais, pois pode levar à subestimativa de parte do depósito mineral com teores significativos.
+
+A distribuição lognormal é usada para modelar variáveis não negativas com assimetria positiva (Rossi e Deutsch, 2014, p. 14).
+
+GAMA
+
+A distribuição gama é usada para modelar valores de dados positivos que são assimétricos à direita e maiores que 0. Ela é comumente usada em estudos de sobrevivência de confiabilidade. 
+
+Existem três diferentes parametrizações no uso comum:
+
+Com um parâmetro de forma {\displaystyle k}k e um parâmetro de escala {\displaystyle \theta }\theta.
+
+Dentro da distribuição gama uma importante propriedade é o fato de que à medida que {\displaystyle \theta }\theta aumenta, essa distribuição se aproxima de uma Normal com média µ e variância {\displaystyle \theta }\theta µ²= µ²/v
+
+
+Os parâmetros associados à Distribuição Gama são α e β e supõem-se ambos positivos. Como a distribuição Gama é unilateral, serve freqüentemente de modelo para quantidades físicas que só tomam valores positivos.
+Além disto, graças à sua versatilidade, torna-se um modelo útil, já que variando os valores de “α” e “β”, podemos obter uma ampla variedade de formas da f.d.p Gama
