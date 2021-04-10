@@ -1,0 +1,65 @@
+16/01/21
+
+Assumindo que y é variável aleatória que descreve o modelo probabilistico x... "Segundo a professora, em inferencia não vamos focar na identificação do modelo, esta fase foi superada, ou adiquirida com a experiencia"
+
+dicas de caracteristicas de dados pelo formatos das curvas de modelos probabilisticos, baseados na assimetria, caudas densidades.
+
+impacto do tamanho da amostra e do nº de sucessos na função de verossimilhança (Aplicavel a Bernoulli)
+1 - o centro de massa está no numero de sucessos (ou proporção 	theta^-> melhor estimador=sucesso/amostra)
+2 - quanto maior a dispersa a função de vero menor a precisão, mais concentrada a medida que maior é o numero de informações.
+
+30/01/21
+
+- descrever incerteza parte da avaliação do contexto para adequar o modelo ao problema
+- O parametro é estimado pela maxima verossimilhança, seja ele quantos thetas existirem
+	- o processo de estimação passa a ser um problema de otimização, pois buscamos a maximização da verossimilhança
+- no modelo Poisson o theta é a taxa média
+- Derivar no produtório deve ser aplicada o log para facilitar a derivação em somas
+- no codigo r fazer o log para que os extensos produtórios não gerem erros de cá lculo
+- MAXIMIZAR A FUNÇÃO DE VEROSSIM É O MESMO QEU MAX A LOG(VERO)
+
+06/02/21
+
+- o pesquisador deve ter o felling da situação pratica do contexto de onde veio os dados para definir o roteiro de investigação e do modelo probabilistico que possa representar este contexto.
+- usar os dados coletados para aprender sobre os parâmetros.
+- 1º fazer a análise exploratória
+	- analisar o domínio (tempo - [Naturais,Reais,...]; [Continua, Discreta,...]
+	- histograma: qual o formato? buscar na literatura qual modelo pode descrevê-lo; (exploração visual)
+- estimar os parâmetros por meio do ponto de maxima da função de verossimilhança.
+- quando o dado não carrega informações sobre o parâmetro?
+	- esima-se os parametros possiveis e a partir desses, os fixamos para se avaliar por sensibilidade quais os melhores valores para o parametro de dificil estimação por meio de carater preditivo.
+
+- modelo GAMA (alpha, beta)[HIST ASSIMETRICO POSITIVO] -> ALPHA denota a forma, BETA denota escala
+	-! DÚVIDA: pq para estimar a max vero usei a função de densidade (log()) e para estimar as curvas usa a VERO em função da função e dos resumos (estatísticas suficientes)
+		-! RESPOSTA (TRANSPOR AUDIO QUE FIZ PARA THAMIRYS)
+
+"Estimar parâmetros é como fazer tiro ao alvo sem saber onde o alvo está"
+deve-se usar estimadores que te conduzam sob suas propriedades teóricas (tipo e tamanho de amostra, por exemplo)para esse alvo.
+	- quanto maior a amostra maior o peso da posteriori
+
+27/02/2021
+- Forma de escolher os parâmetros é maximixando a função de verossimilhança essas estimativas podem ser usadas como os melhres parâmetros do modelo.
+- novo modelo a posteriori a partir de bayes para que seja atualizado a estimação dos parâmetros. >> multiplicando a verossimiçhança pelo nucleo da distribuição a priori l(\thet\;y)x\pi(\theta) -> ver videi as 10:39 o que a profff faa sobre os nuleo                                                                            
+- teorema de bays é o intrumento de inversão dos termos da condicional
+			P(A|B)=P(B|A)xP(A)/P(B)
+		Posteriori -> P(A|B)
+		Verossimilhança -> P(B|A)
+		Priori -> P(A)
+		Marginal -> P(B)
+- nunca trunce seu epaço amosral a priori, isso limitará as estimações dos parâmetros dentro do espaço truncado
+- pesos da verossimilhança é dada na maioria dos casos pelo tamanho da amostra - éla fica concentrada em determinados estimadores
+- ver a possibilidade de criar uma função tal que dado a e b da gama retorne a função a acumulada da beta **** 
+
+13/03/21
+NOTAS NO CADERNO
+
+27/03/21
+- 
+
+ESTUDAR PACOTES
+
+https://cran.r-project.org/web/packages/LaplacesDemon/index.html
+
+PMC {LaplacesDemon}
+p.interval {LaplacesDemon}
+VariationalBayes {LaplacesDemon}
