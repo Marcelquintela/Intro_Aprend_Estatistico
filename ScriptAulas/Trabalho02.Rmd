@@ -1,0 +1,142 @@
+---
+  title: "Aprendizado Estatístico - Trabalho 2"
+author: "Mariane Branco Alves"
+date: "Março, 2021"
+output:
+pdf_document: default
+html_document: default
+---
+
+#Geração dos dados artificiais usados no trabalho
+```{r }
+dados<-rpois(100,1)
+write(t(dados),"atendimentos.csv",ncol=1)
+```
+
+###########################################################
+# Piori 1
+# Gama(0.001,0.001)
+###########################################################
+```{r }
+a1<-0.001 # Parâmetro de forma da priori 1
+b1<-0.001 # Parâmetro de escalada priori 1
+m.priori1<-a1/b1 #média a priori de theta (sob priori 1)
+dp.priori1<-sqrt(a1/b1^2) #d.p a priori de theta (sob priori 1)
+cv.priori1<-dp.priori1/m.priori1 # c.v. a priori de theta (sob priori 1)
+m.priori1
+dp.priori1
+cv.priori1
+```
+
+A média a priori é 1, com desvio-padrão 31.62, resultando em coeficiente bastante elevado (o desvio-padrão é quase 32 vezes maior que a média)
+Em suma, a especificação de priori 1 é vaga.
+#(1,0 ponto)
+
+#Elicitação dos parâmetros da priori 2
+```{r }
+lambda<-seq(0,5,0.1)
+alpha<-5*lambda
+matriz<-cbind(alpha,lambda,1-pgamma(10,shape=alpha,rate=lambda))
+matriz
+# Observa-se que os pressupostos do analista 2 são aproximadamente satisfeitos para:
+a2<-3.5
+b2<-0.7
+```
+#(1,0 ponto)
+
+#Momentos de primeira e segunda ordem para theta, sob priori 2
+```{r }
+m.priori2<-a2/b2 #média a priori de theta (sob priori 2)
+dp.priori2<-sqrt(a2/b2^2) #d.p a priori de theta (sob priori 21)
+cv.priori2<-dp.priori2/m.priori2 # c.v. a priori de theta (sob priori 2)
+m.priori2
+dp.priori2
+cv.priori2
+```
+# (1,0 ponto)
+
+#Gráfico das duas prioris:
+```{r }
+theta<-seq(0,15,0.01)
+priori1<-dgamma(theta,a1, rate=b1)
+priori2<-dgamma(theta,a2, rate=b2)
+plot(theta,priori2)
+lines(theta,priori1,type="l",ylab="Prioris 1 e 2",col=2)
+```
+
+
+#(1,0 ponto)
+
+#A priori 2 tem maior concentração de massa no suporte paramétrico e,
+#portanto, é mais informativa que a priori 1
+#(1,0 ponto)
+
+# Para fazer o gráfico da função de verossimilhança,
+# precisamos de uma grade de valores para theta
+# a grade abaixo foi arbitrária, respeitando o fato de que theta>0
+
+#Cenário 1:amostra grande
+```{r }
+amostra.gr<-scan(file="atendimentos.csv")
+n1<-length(amostra.gr)
+t1<-sum(amostra.gr) # número de "atendimentos" observados em 100 horas, selecionadas ao acaso
+```
+
+
+#Cenário 2:amostra pequena
+```{r }
+amostra.pq<-sample(amostra.gr,5)
+n2<-length(amostra.pq)
+t2<-sum(amostra.pq) # número de "cancelamentos" observados em 10 horas, selecionadas ao acaso
+
+```
+
+
+
+#Gráfico da função de verossimilhança sob amostra grande e pequena
+```{r }
+theta<-seq(0,10,0.01)
+#Cálculo do valor da função de verossimilhança, para cada theta da grade, à luz dos dados da amostra "grande" (n=100, t1)
+vero.gr<-exp(-n1*theta)*theta^t1
+# Cálculo do valor da função de verossimilhança, para cada theta da grade, à luz dos dados da amostra pequena (n=10, t2)
+vero.pq<-exp(-n2*theta)*theta^t2
+plot(theta,vero.gr/max(vero.gr))
+lines(theta,vero.pq/max(vero.pq))
+```
+#Gráfico 1,0 ponto
+#Comentário 1,0 ponto
+
+#Observa-se verossimilhança bem mais concentrada ao se observar
+#a amostra grande.
+#(2,0) pontos
+
+#Obtenção das posterioris e gráficos
+```{r }
+theta<-seq(0,10,0.01)
+poster.1.pq<-dgamma(theta,shape=0.01+t2,rate=0.01+n2)
+poster.2.pq<-dgamma(theta,shape=3.5+t2,rate=0.7+n2)
+poster.1.gr<-dgamma(theta,shape=0.01+t1,rate=0.01+n1)
+poster.2.gr<-dgamma(theta,shape=3.5+t1,rate=0.7+n1)
+```
+#2,5 pontos
+
+```{r }
+##Preparação de uma janela gráfica particionada em duas linhas e duas colunas, para acomodar os 4 gráficos que seguem:
+par(mfrow=c(1,2))
+#Posteriori para theta sob amostra pequena e priori 1:
+plot(theta,poster.1.pq,type="l",ylab="n=10")
+#Posteriori para theta sob amostra pequena e priori 2:
+lines(theta,poster.2.pq,type="l",ylab="n=10",col=2)
+#Posteriori para theta sob amostra grande e priori 1:
+plot(theta,poster.1.gr,type="l",ylab="n=100")
+#Posteriori para theta sob amostra grande e priori 2:
+lines(theta,poster.2.gr,type="l",ylab="n=100",col=2)
+legend("topright",legend=c("Priori 1","Priori 2"),lty=c(1,1),col=c(1,2))
+```
+
+#Observa-se que, ao se aunentar o tamanho da amostra,
+#as distribuições a priori perdem peso na análise
+# e as posterioris se assemelham. Sob amostra menor,
+# a priori 1, que tinha maior massa próxima a zero, "puxa"
+#a posteriori para baixo.
+#(1,5 ponto)
